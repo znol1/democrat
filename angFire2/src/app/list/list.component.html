@@ -1,0 +1,50 @@
+<div class="row p-2" >
+  <div class="col-md-12 p-2 justify-content-center">
+    <h4>Все произведения</h4>
+  </div>
+  <div class="col-md-3" *ngFor ="let item of employee">
+    <div *ngIf="!item.isedit">
+    <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+              {{item.name}}
+          </div>
+          <div class="card-subtitle">
+            {{item.age}} годиков
+          </div>
+          <div class="card-text">
+             {{item.address}}
+          </div>
+          <div class="card-text">
+            Оценка: {{item.mark}}
+          </div><br>
+          <div class="card-text">
+          </div><br>
+          <div class="form-group" >
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="item.editmark" class="form-check-input" type="radio" value="1"  [name]="item.id" >
+              <label>1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="item.editmark" class="form-check-input" type="radio" value="2" [name]="item.id">
+              <label>2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="item.editmark" class="form-check-input" type="radio"  value="3" [name]="item.id">
+              <label>3</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="item.editmark" class="form-check-input" type="radio" value="4" [name]="item.id">
+              <label>4</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="item.editmark" class="form-check-input" type="radio"  value="5" [name]="item.id">
+              <label>5</label>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-xs" (click)="UpdateMark(item, item.id)" [disabled]="this.k" >Поставить свою оценку</button>
+        </div>
+      </div>
+</div>
+    </div>
+  </div>

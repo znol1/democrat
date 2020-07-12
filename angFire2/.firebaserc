@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "democrat-27270": {
+      "hosting": {
+        "angFire2": [
+          "democrat-27270"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "democrat-27270"
+  }
+}
