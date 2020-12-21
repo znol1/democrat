@@ -71,7 +71,9 @@ export class CrudService {
           userA: e.payload.doc.data().userAccess,
         };
       });
-      console.log(this.us1[0].userA);
+      this.us1.forEach(i => {
+        console.log(i.userA)
+        })
     });
   }
 }
