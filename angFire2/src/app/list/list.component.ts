@@ -12,8 +12,10 @@ export class ListComponent implements OnInit {
   editmark: number;
   private usersAcc: any;
   k: boolean;
+  u: any;
   employee: any;
   us1: any;
+  ready: boolean;
   l = localStorage.getItem('bool');
   constructor(public crudservice: CrudService, private authservice: AuthService){}
 
@@ -31,18 +33,34 @@ export class ListComponent implements OnInit {
           mark: e.payload.doc.data().mark,
         };
       });
-      this.crudservice.getAllemployee2().subscribe(data1 => {
-        this.us1 = data1.map(e => {
-          return {
-            userA: e.payload.doc.data().userAccess,
-          };
-        });
-      });
-      this.usersAcc = this.us1;
-      this.k = this.usersAcc.map((e => (e.userA !== this.authservice.curUser)));
     });
+    this.ready = false;
+    this.k = true;
+    // this.crudservice.globalId = 'HKIsfUDMOWIjTHuCyOxF';
+    // this.crudservice.getAllemployee2().subscribe(data1 => {
+    //   this.us1 = data1.map(e => {
+    //     return {
+    //       userA: e.payload.doc.data().userAccess,
+    //     };
+    //   });
+    // });
+    // this.usersAcc = this.us1;
+    // this.k = true;
+    // if (this.usersAcc !== undefined) {
+    //   for (const n of this.usersAcc) {
+    //     console.log(n.userA);
+    //     console.log('блаблабла');
+    //     if (n.userA === this.authservice.curUser){
+    //       this.k = false;
+    //     }
+    //     // this.k = n.userA !== this.authservice.curUser;
+    //     console.log('Живе Беларусь');
+    //   }
+    // }else {
+    //   console.log('даттебаё');
+    // }
+    // console.log(this.authservice.curUser);
   }
-
 
   UpdateMark(recorddata, recordid): any
   {
@@ -50,15 +68,36 @@ export class ListComponent implements OnInit {
       mark: 0,
       userId: 'Иван',
     };
+    this.crudservice.isAllowedProto(recordid);
     record.mark = Number(recorddata.editmark) + recorddata.mark;
-    this.crudservice.update_employee(recordid, record);
+    this.crudservice.updateEmployee(recordid, record);
     recorddata.isedit = false;
     record.userId = recorddata.user;
     this.crudservice.valuersAccess(recordid);
     console.log(record.userId);
     localStorage.setItem('bool', 'true');
-    this.l = localStorage.getItem('bool');
-    // this.crudservice.isAllowed(recordid);
+    // this.l = localStorage.getItem('bool');
+    // this.crudservice.isAllowed();
+    this.crudservice.globalId = recordid;
+    //   .subscribe(data1 => {
+    //   this.us1 = data1.map(e => {
+    //     return {
+    //       userA: e.payload.doc.data().userAccess,
+    //     };
+    //   });
+    // });
+    this.usersAcc = this.us1;
+    console.log(this.usersAcc);
+    if (this.usersAcc !== undefined) {
+      for (const n of this.usersAcc) {
+        console.log(n.userA);
+        if (n.userA === this.authservice.curUser){
+          this.k = false;
+        }
+        // this.k = n.userA !== this.authservice.curUser;
+        console.log('Живе Беларусь');
+      }
+    }
+    console.log(this.k);
   }
-
 }

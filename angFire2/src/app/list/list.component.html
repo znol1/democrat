@@ -42,7 +42,8 @@
               <label>5</label>
             </div>
           </div>
-          <button class="btn btn-primary btn-xs" (click)="UpdateMark(item, item.id)" [disabled]="this.k" >Поставить свою оценку</button>
+          <div>
+          <button class="btn btn-primary btn-xs" (click)="UpdateMark(item, item.id)" [disabled]="this.authservice.curUser==''">Поставить свою оценку</button>
         </div>
       </div>
 </div>

@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import Item = firebase.analytics.Item;
 import {element} from 'protractor';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class CrudService {
   constructor(public fireservices: AngularFirestore, private authservice: AuthService) { }
   k: boolean;
   us: any;
+  us1: any;
+  globalId: any;
   private actions: any;
+  employeee: any;
+  d: any;
   create_Newemployee(Record): any
   {
     return this.fireservices.collection('Employee').add(Record);
@@ -28,24 +33,25 @@ export class CrudService {
   {
     return this.fireservices.collection('Employee').snapshotChanges();
   }
-  getAllemployee2(): any
+  getAllemployee2(recordid)
   {
-    return this.fireservices.collection('Employee/' + '7efXzZqteOujLUt0Urkv' + '/valuers').snapshotChanges();
+    return this.fireservices.collection('Employee').doc(recordid).collection('valuers').snapshotChanges();
   }
 
-  update_employee(recordid, record): any
+  updateEmployee(recordid, record): any
   {
     this.fireservices.doc('Employee/' + recordid).update(record);
-    // this.us = this.fireservices.collection<Item>('Employee/' + recordid + '/valusers');
-    // this.get_Allemployee().subscribe(data => {
-    //
-    //   this.us = data.map(e => {
-    //     return {
-    //       user: e.payload.doc.data().user,
-    //     };
-    //   });
-    //   console.log(this.us);
-    // });
+    console.log(this.authservice.curUser);
+    this.us = this.fireservices.collection<Item>('Employee/' + recordid + '/valusers');
+    this.get_Allemployee().subscribe(data => {
+
+      this.us = data.map(e => {
+        return {
+          user: e.payload.doc.data().user,
+        };
+      });
+      console.log(this.us);
+    });
   }
 
   delete_employee(recordid): any
@@ -54,21 +60,18 @@ export class CrudService {
   }
   valuersAccess(recordid): any {
     const Record = {
-      userAccess: this.authservice.curUser
+      userAccess: this.authservice.currentUserId
     };
     this.us = this.fireservices.doc('Employee/' + recordid).collection('/valuers').add(Record);
   }
-  isAllowedProto(): any {
-    // this.getAllemployee2().subscribe(data => {
-    //    this.us1 = data.map(e => {
-    //     return {
-    //       userA: e.payload.doc.data().userAccess,
-    //     };
-    //   });
-    // });
-    console.log(this.usersAcc);
-  }
-  isAllowed(): any {
-    this.isAllowedProto();
+  isAllowedProto(recordid): any {
+    return this.getAllemployee2(recordid).subscribe(data => {
+       this.us1 = data.map(e => {
+        return {
+          userA: e.payload.doc.data().userAccess,
+        };
+      });
+      console.log(this.us1[0].userA);
+    });
   }
 }

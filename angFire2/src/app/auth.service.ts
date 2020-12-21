@@ -12,8 +12,8 @@ export class AuthService {
 
 
   constructor(private afu: AngularFireAuth, private router: Router) {
-    this.afu.authState.subscribe((auth => {
-      this.authState = auth;
+    this.afu.authState.subscribe((autho => {
+      this.authState = autho;
     }));
   }
 
@@ -43,6 +43,8 @@ export class AuthService {
     return this.afu.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
+        localStorage.setItem('user', this.authState.user.uid);
+        this.curUser = localStorage.getItem('user');
       })
       .catch(error => {
         console.log(error)

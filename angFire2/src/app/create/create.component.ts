@@ -87,7 +87,7 @@ export class CreateComponent implements OnInit {
     record.name = recorddata.editname;
     record.age = recorddata.editage;
     record.address = recorddata.editaddress;
-    this.crudservice.update_employee(recorddata.id, record);
+    this.crudservice.updateEmployee(recorddata.id, record);
     recorddata.isedit = false;
   }
 

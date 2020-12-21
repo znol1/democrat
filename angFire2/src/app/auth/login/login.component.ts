@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   logout(): any {
     this.router.navigate(['/login']);
     this.authservice.curUser = '';
+    localStorage.setItem('user', '');
   }
   validateForm(email, password): any {
     if (email.lenght === 0) {
