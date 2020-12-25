@@ -55,7 +55,7 @@
         <div class="card">
           <div class="card-body">
             <div class="card-title">
-              Edit Employee
+              Редактировать элемент
             </div>
             <div class="row">
               <div class="form-group">
@@ -66,13 +66,16 @@
                   <input type="number" [(ngModel)]="item.editage" class="form-control">
                 </div>
                 <div class="col-md-12">
-                  <input type="text" [(ngModel)]="item.editaddress" class="form-control">
+                  <textarea [(ngModel)]="item.editaddress">
+                  {{item.editaddress}}
+                  </textarea>
+                  <!-- <input type="text" [(ngModel)]="item.editaddress" class="form-control"> -->
                 </div>
               </div>
             </div>
 
-            <button class="btn btn-danger btn-xs" (click)="item.isedit = false">Cancel</button>
-            <button class="btn btn-primary btn-xs" (click)="Updatarecord(item)">Update Employee</button>
+            <button class="btn btn-danger btn-xs" (click)="item.isedit = false">Закрыть</button>
+            <button class="btn btn-primary btn-xs" (click)="Updatarecord(item)">Изменить</button>
           </div>
         </div>
       </ng-template>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CrudService} from '../crud.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public crudservice: CrudService, public authservice: AuthService){}
 
   ngOnInit(): void {
   }

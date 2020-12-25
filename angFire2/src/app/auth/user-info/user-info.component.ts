@@ -8,10 +8,19 @@ import {Router} from '@angular/router';
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit {
+  curId: any;
+  curName: any;
 
   constructor(public authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.curId = '';
+    this.curName = '';
+    setTimeout(() => {    
+      this.curId = this.authservice.currentUserId,
+      this.curName = this.authservice.currentUserName}, 100
+    );
   }
+  
 
 }

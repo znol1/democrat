@@ -10,6 +10,7 @@ import {AuthService} from '../auth.service';
 export class CreateComponent implements OnInit {
   employee: any;
   employeeName: string;
+  employeeGenre: string;
   employeeAge: number;
   employeeAddress: string;
   employeeUser: string;
@@ -28,6 +29,7 @@ export class CreateComponent implements OnInit {
           id: e.payload.doc.id,
           isedit: false,
           name: e.payload.doc.data().name,
+          genre: e.payload.doc.data().name,
           age: e.payload.doc.data().age,
           address: e.payload.doc.data().address,
           user: e.payload.doc.data().user,
@@ -43,12 +45,14 @@ export class CreateComponent implements OnInit {
   {
     const Record = {
       name: 'Иван',
+      genre: '',
       age: 0,
       address: 'string',
       user: this.authservice.curUser,
       mark: 0,
     };
     Record.name = this.employeeName;
+    Record.genre = this.employeeGenre;
     Record.age = this.employeeAge;
     Record.address = this.employeeAddress;
     // Record.address = Record.address.replace('\n', '<br>');
@@ -56,6 +60,7 @@ export class CreateComponent implements OnInit {
     this.crudservice.create_Newemployee(Record).then(res => {
 
       this.employeeName = '';
+      this.employeeGenre = '';
       this.employeeAge = undefined;
       this.employeeAddress = '';
       this.employeeUser = '';

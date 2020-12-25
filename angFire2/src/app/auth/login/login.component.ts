@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     if (this.validateForm(this.email, this.password)) {
       this.authservice.loginWithEmail(this.email, this.password)
         .then(() => {
+          this.router.navigate(['/userInfo']);
           console.log('');
         }).catch(error => {
         this.error = error;
