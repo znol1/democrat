@@ -51,6 +51,7 @@ export class CreateComponent implements OnInit {
     Record.name = this.employeeName;
     Record.age = this.employeeAge;
     Record.address = this.employeeAddress;
+    // Record.address = Record.address.replace('\n', '<br>');
 
     this.crudservice.create_Newemployee(Record).then(res => {
 
