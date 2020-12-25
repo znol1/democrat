@@ -18,10 +18,16 @@ export class ListComponent implements OnInit {
   ready: boolean;
   hiddenText: any;
   val: any;
+  search: any;
+  checked: any;
   l = localStorage.getItem('bool');
   constructor(public crudservice: CrudService, private authservice: AuthService){}
 
   ngOnInit(): any {
+    // setInterval(() => console.log(this.search), 5000)
+    this.checked = false;
+    this.search = '';
+    console.log(this.search);
     this.hiddenText = '';
     this.crudservice.get_Allemployee().subscribe(data => {
 

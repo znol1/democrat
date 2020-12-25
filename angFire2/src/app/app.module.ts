@@ -13,6 +13,8 @@ import {environment} from '../environments/environment';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserInfoComponent } from './auth/user-info/user-info.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { RatePipe } from './pipes/rate.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { UserInfoComponent } from './auth/user-info/user-info.component';
     LoginComponent,
     RegisterComponent,
     UserInfoComponent,
+    FilterPipe,
+    RatePipe,
   ],
   imports: [
     BrowserModule,

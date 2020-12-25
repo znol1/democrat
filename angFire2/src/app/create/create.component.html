@@ -10,6 +10,7 @@
   </div>
   <div class="form-group">
     <select type="text" class="form-control" [(ngModel)]="employeeGenre">
+      <option value="" disabled selected>Выберите жанр</option>
       <option value="Sad">Радостный</option>
       <option value="Funny">Смешной</option>
       <option value="futuristic">Футуристичный</option>
@@ -19,7 +20,7 @@
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" [(ngModel)]="employeeAddress" placeholder="Ваше стихотворение" ></textarea>
   </div>
   <div class="form-group">
-    <button class="btn btn-primary" (click)="CreateRecord()" [disabled]="!employeeName || !employeeAge || !employeeAddress">Опубликовать</button>
+    <button class="btn btn-primary" (click)="CreateRecord()" [disabled]="!employeeName || !employeeAge || !employeeAddress || employeeGenre==''">Опубликовать</button>
   </div>
   <div class="form-group">
     <h4><b>{{message}}</b></h4>

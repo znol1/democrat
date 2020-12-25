@@ -3,8 +3,8 @@
          routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="font-size: 25pt">Democrat</a>
       <!-- routerLinkActive используется для применения css класса к выбранному пункту меню, в данном случае active - сss класс -->
       <!-- [routerLinkActiveOptions]="{exact: true}" - используется, для того, чтобы указать полное и строгое соответствие адресу в строке и роуту -->
-      <a class="nav-item nav-link" [routerLink]="'/list'" routerLinkActive="active" >Каталог</a>
-      <a class="nav-item nav-link" [routerLink]="'/create'" routerLinkActive="active">Создать</a>
+      <a class="nav-item nav-link" [routerLink]="'/list'" routerLinkActive="active" >Стихи</a>
+      <a class="nav-item nav-link" [routerLink]="'/create'" routerLinkActive="active">Опубиковать</a>
       <div *ngIf= "this.authservice.curUser==''">
       <a class="nav-item nav-link" [routerLink]="'/login'" routerLinkActive="active">Логин</a>
       </div>

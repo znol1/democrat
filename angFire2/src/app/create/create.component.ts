@@ -22,6 +22,7 @@ export class CreateComponent implements OnInit {
   constructor(public crudservice: CrudService, private authservice: AuthService){}
 
   ngOnInit(): any {
+    this.employeeGenre = '';
     this.crudservice.get_Allemployee().subscribe(data => {
 
       this.employee = data.map(e => {
@@ -67,7 +68,7 @@ export class CreateComponent implements OnInit {
       this.employeeMark = undefined;
       // this.userId = this.crudservice.addUser();
       console.log(res);
-      this.message = 'Employee data save Done';
+      this.message = 'Данные успешно сохранены';
     }).catch(error => {
       console.log(error);
     });
