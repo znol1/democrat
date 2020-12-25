@@ -16,10 +16,13 @@ export class ListComponent implements OnInit {
   employee: any;
   us1: any;
   ready: boolean;
+  hiddenText: any;
+  val: any;
   l = localStorage.getItem('bool');
   constructor(public crudservice: CrudService, private authservice: AuthService){}
 
   ngOnInit(): any {
+    this.hiddenText = '';
     this.crudservice.get_Allemployee().subscribe(data => {
 
       this.employee = data.map(e => {
@@ -62,13 +65,43 @@ export class ListComponent implements OnInit {
     // console.log(this.authservice.curUser);
   }
 
+  isAllowed(recordid): any
+  {
+    this.crudservice.getAllemployee2(recordid).subscribe(data => {
+      this.us1 = data.map(e => {
+       return {
+         userA: e.payload.doc.data().userAccess,
+       };
+     });
+   });
+
+    return new Promise((resolve, reject) => setTimeout(() => {
+      for (let el in this.us1) {
+        console.log(this.us1[el].userA);
+        if (this.us1[el].userA == this.authservice.currentUserId) {
+          console.log('true');
+          return resolve(true);
+        }
+      }
+      console.log('false');
+      return reject(false);
+    }, 2000));
+  }
+  Watch(recorddata, recordid): any {
+    this.isAllowed(recordid).then(
+      resolve => this.val = alert('Вы уже ставили оценку данной работе'),
+      reject => this.val = this.UpdateMark(recorddata, recordid),
+    )
+    console.log(this.val);
+    console.log(recorddata.editmark);
+  };
+
   UpdateMark(recorddata, recordid): any
   {
     const record = {
       mark: 0,
       userId: 'Иван',
     };
-    this.crudservice.isAllowedProto(recordid);
     record.mark = Number(recorddata.editmark) + recorddata.mark;
     this.crudservice.updateEmployee(recordid, record);
     recorddata.isedit = false;
@@ -99,5 +132,5 @@ export class ListComponent implements OnInit {
       }
     }
     console.log(this.k);
-  }
+  };
 }

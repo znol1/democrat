@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import Item = firebase.analytics.Item;
 import {element} from 'protractor';
 import { ThrowStmt } from '@angular/compiler';
+import { threadId } from 'worker_threads';
 
 @Injectable({
   providedIn: 'root'
@@ -65,15 +66,18 @@ export class CrudService {
     this.us = this.fireservices.doc('Employee/' + recordid).collection('/valuers').add(Record);
   }
   isAllowedProto(recordid): any {
-    return this.getAllemployee2(recordid).subscribe(data => {
+    var arr: string[];
+    arr = [];
+    this.getAllemployee2(recordid).subscribe(data => {
        this.us1 = data.map(e => {
         return {
           userA: e.payload.doc.data().userAccess,
         };
       });
       this.us1.forEach(i => {
-        console.log(i.userA)
+        arr.push(i.userA.toString());
         })
     });
+    return arr;
   }
 }
