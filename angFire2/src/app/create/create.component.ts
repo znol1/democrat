@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit {
           id: e.payload.doc.id,
           isedit: false,
           name: e.payload.doc.data().name,
-          genre: e.payload.doc.data().name,
+          genre: e.payload.doc.data().genre,
           age: e.payload.doc.data().age,
           address: e.payload.doc.data().address,
           user: e.payload.doc.data().user,
