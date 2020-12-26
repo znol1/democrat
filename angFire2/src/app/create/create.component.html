@@ -11,16 +11,16 @@
   <div class="form-group">
     <select type="text" class="form-control" [(ngModel)]="employeeGenre">
       <option value="" disabled selected>Выберите жанр</option>
-      <option value="Sad">Радостный</option>
+      <option value="Sad">Грустный</option>
       <option value="Funny">Смешной</option>
       <option value="futuristic">Футуристичный</option>
       </select>
   </div>
   <div class="form-group">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" [(ngModel)]="employeeAddress" placeholder="Ваше стихотворение" ></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" [(ngModel)]="employeePoem" placeholder="Ваше стихотворение" ></textarea>
   </div>
   <div class="form-group">
-    <button class="btn btn-primary" (click)="CreateRecord()" [disabled]="!employeeName || !employeeAge || !employeeAddress || employeeGenre==''">Опубликовать</button>
+    <button class="btn btn-primary" (click)="CreateRecord()" [disabled]="!employeeName || !employeeAge || !employeePoem || employeeGenre==''">Опубликовать</button>
   </div>
   <div class="form-group">
     <h4><b>{{message}}</b></h4>
@@ -33,7 +33,7 @@
 
     <div class="col-md-3" *ngFor ="let item of employee">
 
-      <div class="card"  *ngIf="item.user == this.authservice.curUser">
+      <div class="card "  *ngIf="item.user == this.authservice.curUser">
         <div *ngIf="!item.isedit; else elseBlock">
         <div class="card-body">
           <div class="card-title">
@@ -46,8 +46,7 @@
             {{item.genre}} 
           </div><br>
           <div class="card-text">
-            <p>
-            {{item.address}}</p>
+            <pre>{{item.poem}}</pre>
           </div>
           <div class="card-text">
             {{item.mark}} очков от пользователей
@@ -63,32 +62,22 @@
       </div>
 
       <ng-template #elseBlock>
-        <div class="card">
-          <div class="card-body">
+          <div class="card-body" style="height: 500px;">
             <div class="card-title">
               Редактировать элемент
             </div>
-            <div class="row">
-              <div class="form-group">
-                <div class="col-md-12">
+              <div class="form-group" style="height: 500px;">
                   <input type="text" [(ngModel)]="item.editname" class="form-control">
-                </div>
-                <div class="col-md-12">
                   <input type="number" [(ngModel)]="item.editage" class="form-control">
-                </div>
-                <div class="col-md-12">
-                  <textarea [(ngModel)]="item.editaddress">
-                  {{item.editaddress}}
+                  <textarea [(ngModel)]="item.editpoem" style="height: 70%; width: 100%;">
+                  {{item.editpoem}}
                   </textarea>
                   <!-- <input type="text" [(ngModel)]="item.editaddress" class="form-control"> -->
-                </div>
               </div>
-            </div>
 
             <button class="btn btn-danger btn-xs" (click)="item.isedit = false">Закрыть</button>
             <button class="btn btn-primary btn-xs" (click)="Updatarecord(item)">Изменить</button>
           </div>
-        </div>
       </ng-template>
     </div>
   </div>

@@ -12,7 +12,7 @@ export class CreateComponent implements OnInit {
   employeeName: string;
   employeeGenre: string;
   employeeAge: number;
-  employeeAddress: string;
+  employeePoem: string;
   employeeUser: string;
   employeeMark: number;
   userId: string;
@@ -32,7 +32,7 @@ export class CreateComponent implements OnInit {
           name: e.payload.doc.data().name,
           genre: e.payload.doc.data().genre,
           age: e.payload.doc.data().age,
-          address: e.payload.doc.data().address,
+          poem: e.payload.doc.data().poem,
           user: e.payload.doc.data().user,
           mark: e.payload.doc.data().mark,
         };
@@ -48,14 +48,14 @@ export class CreateComponent implements OnInit {
       name: 'Иван',
       genre: '',
       age: 0,
-      address: 'string',
+      poem: 'string',
       user: this.authservice.curUser,
       mark: 0,
     };
     Record.name = this.employeeName;
     Record.genre = this.employeeGenre;
     Record.age = this.employeeAge;
-    Record.address = this.employeeAddress;
+    Record.poem = this.employeePoem;
     // Record.address = Record.address.replace('\n', '<br>');
 
     this.crudservice.create_Newemployee(Record).then(res => {
@@ -63,7 +63,7 @@ export class CreateComponent implements OnInit {
       this.employeeName = '';
       this.employeeGenre = '';
       this.employeeAge = undefined;
-      this.employeeAddress = '';
+      this.employeePoem = '';
       this.employeeUser = '';
       this.employeeMark = undefined;
       // this.userId = this.crudservice.addUser();
@@ -80,7 +80,7 @@ export class CreateComponent implements OnInit {
     Record.isedit = true;
     Record.editname = Record.name;
     Record.editage = Record.age;
-    Record.editaddress = Record.address;
+    Record.editpoem = Record.poem;
 
   }
 
@@ -89,11 +89,11 @@ export class CreateComponent implements OnInit {
     const record = {
       name: 'Иван',
       age: 0,
-      address: 'string',
+      poem: 'string',
     };
     record.name = recorddata.editname;
     record.age = recorddata.editage;
-    record.address = recorddata.editaddress;
+    record.poem = recorddata.editpoem;
     this.crudservice.updateEmployee(recorddata.id, record);
     recorddata.isedit = false;
   }

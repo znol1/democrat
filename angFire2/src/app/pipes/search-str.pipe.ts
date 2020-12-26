@@ -11,7 +11,7 @@ export class SearchStrPipe implements PipeTransform {
     }
     const arr: any= [];
     for(let el in value) {
-      let name: string= value[el].address.toLowerCase();
+      let name: string= value[el].poem.toLowerCase();
       if(name.startsWith(sName)) {
         arr.push(value[el]);
       }

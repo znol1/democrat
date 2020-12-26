@@ -40,7 +40,7 @@ export class ListComponent implements OnInit {
           name: e.payload.doc.data().name,
           age: e.payload.doc.data().age,
           genre: e.payload.doc.data().genre,
-          address: e.payload.doc.data().address,
+          poem: e.payload.doc.data().poem,
           user: e.payload.doc.data().user,
           mark: e.payload.doc.data().mark,
         };
