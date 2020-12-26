@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth.service';
+import {CrudService} from '../../crud.service';
 
 @Component({
   selector: 'app-register',
@@ -10,13 +11,14 @@ import {AuthService} from '../../auth.service';
 })
 export class RegisterComponent implements OnInit {
 
+  userLogin: '';
   email = '';
   password = '';
   message = '';
   errorMessage = ''; // validation error handle
   error: { name: string, message: string } = { name: '', message: '' }; // for firbase error handle
 
-  constructor(private authservice: AuthService, private router: Router) { }
+  constructor(public crudservice: CrudService, private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +28,25 @@ export class RegisterComponent implements OnInit {
     this.errorMessage = '';
     this.error = {name : '' , message: ''};
   }
+  CreateUser(): any
+  {
+    const Record = {
+      name: this.userLogin,
+      email: this.email,
+    };
+
+    this.crudservice.createNewUser(Record).then(res => {
+
+      this.email = '';
+      this.userLogin = '';
+      // this.userId = this.crudservice.addUser();
+      console.log(res);
+      this.message = 'Данные успешно сохранены';
+    }).catch(error => {
+      console.log(error);
+    });
+
+  }
 
   register(): any
   {
@@ -33,8 +54,10 @@ export class RegisterComponent implements OnInit {
     if (this.validateForm(this.email, this.password)) {
       this.authservice.registerWithEmail(this.email, this.password)
         .then(() => {
+          this.CreateUser(),
+          console.log(this.authservice.currentUserId)
           this.message = 'you are register with data on firbase';
-          this.router.navigate(['/userinfo']);
+          this.router.navigate(['/userInfo']);
         }).catch(error => {
         this.error = error
         this.router.navigate(['/register']);

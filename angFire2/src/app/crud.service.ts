@@ -26,6 +26,10 @@ export class CrudService {
   {
     return this.fireservices.collection('Employee').add(Record);
   }
+  createNewUser(Record): any
+  {
+    return this.fireservices.collection('users').add(Record);
+  }
   addUser(Record): any
   {
     return this.fireservices.collection('Employee').add(Record);

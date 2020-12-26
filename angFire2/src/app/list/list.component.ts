@@ -19,6 +19,7 @@ export class ListComponent implements OnInit {
   hiddenText: any;
   val: any;
   search: any;
+  searchS: any;
   checked: any;
   l = localStorage.getItem('bool');
   constructor(public crudservice: CrudService, private authservice: AuthService){}
@@ -27,6 +28,7 @@ export class ListComponent implements OnInit {
     // setInterval(() => console.log(this.search), 5000)
     this.checked = false;
     this.search = '';
+    this.searchS = '';
     console.log(this.search);
     this.hiddenText = '';
     this.crudservice.get_Allemployee().subscribe(data => {

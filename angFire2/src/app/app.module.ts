@@ -15,6 +15,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { UserInfoComponent } from './auth/user-info/user-info.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { RatePipe } from './pipes/rate.pipe';
+import { SearchStrPipe } from './pipes/search-str.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RatePipe } from './pipes/rate.pipe';
     UserInfoComponent,
     FilterPipe,
     RatePipe,
+    SearchStrPipe,
   ],
   imports: [
     BrowserModule,
